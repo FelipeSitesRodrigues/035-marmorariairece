@@ -14,22 +14,23 @@ assets/img/portfolio/mini/    47 fotos em 620px (esteira e grade)
 assets/img/portfolio/full/    as mesmas 47 em 1500px (tela cheia)
 ```
 
-## Antes de publicar
+## WhatsApp
 
-**1. WhatsApp.** Abrir `assets/js/main.js` e trocar as duas primeiras constantes:
+O número fica em duas constantes no topo de `assets/js/main.js`:
 
 ```js
-var WA_NUMERO = '5574000000000';   // 55 + DDD + número, só dígitos
-var WA_EXIBE  = '(74) 0 0000-0000'; // como aparece escrito no site
+var WA_NUMERO = '5574999556446';    // 55 + DDD + número, só dígitos
+var WA_EXIBE  = '(74) 9 9955-6446'; // como aparece escrito no site
 ```
 
 Os 34 links de WhatsApp da página e o número exibido saem daí. É o único lugar a mexer.
+Para trocar, atualizar também o campo `telephone` do bloco `application/ld+json` em
+`index.html`.
 
-**2. Telefone no SEO.** Em `index.html`, atualizar o campo `telephone` do bloco
-`application/ld+json`.
+## Ainda pendente
 
-**3. Endereço.** Hoje consta apenas "Irecê e região, Bahia", no bloco de contato e no
-mesmo `ld+json`.
+**Endereço.** Hoje consta apenas "Irecê e região, Bahia", no bloco de contato e no
+`ld+json` do `index.html`.
 
 ## Publicação
 

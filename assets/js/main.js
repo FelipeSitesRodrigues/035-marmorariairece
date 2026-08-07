@@ -9,8 +9,8 @@
      WA_NUMERO  = número no formato internacional, só dígitos: 55 + DDD + número
      WA_EXIBE   = como o número aparece escrito no site
      ====================================================================== */
-  var WA_NUMERO = '5574000000000';
-  var WA_EXIBE  = '(74) 0 0000-0000';
+  var WA_NUMERO = '5574999556446';
+  var WA_EXIBE  = '(74) 9 9955-6446';
   /* ====================================================================== */
 
   var WA_BASE = 'https://wa.me/' + WA_NUMERO;
