@@ -1,0 +1,13 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+
+# Arquivos de teste e rascunho gerados durante o desenvolvimento
+_*.html
+*.log
+*.tmp
