@@ -300,7 +300,7 @@
     ['.nunes .h2', 0], ['.fala', 1], ['.pontos li', 2],
     ['.sec-head > *', 0], ['.svc .tabs', 1],
     ['.pf-topo > *', 0], ['.pf .pf-rodape > *', 1],
-    ['.mat .h2', 0], ['.mat .sec-lead', 1], ['.mat-card', 2],
+    ['.preco .h2', 0], ['.preco .sec-lead', 1], ['.fatores li', 2], ['.preco-fecho', 1],
     ['.proc .h2', 0], ['.passos li', 2],
     ['.cta-copy > *', 0], ['.cta-side > *', 1],
     ['.faq .h2', 0], ['.acc', 1], ['.faq-cta', 1]
@@ -325,7 +325,7 @@
   }
 
   /* ---- 6. Link do menu acompanha a seção ------------------------------ */
-  var secoes = ['catalogo', 'servicos', 'trabalhos', 'materiais', 'contato']
+  var secoes = ['catalogo', 'servicos', 'trabalhos', 'preco', 'contato']
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
 

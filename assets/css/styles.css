@@ -462,33 +462,32 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
 body.travado{overflow:hidden}
 
 /* --------------------------------------------------------------------------
-   MATERIAIS
+   O QUE PESA NO PREÇO
+   Quatro fatores em 2x2, separados só por fio. Sem card: a seção é de
+   texto, e caixa aqui só criaria peso visual que ela não precisa.
    -------------------------------------------------------------------------- */
-.mat{padding:clamp(66px,8vw,116px) 0;background:var(--slab)}
-/* 4 peças em 3 colunas: larga + estreita / estreita + larga. Sem célula vazia. */
-.mat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(44px,5vw,64px)}
-.mat-card{
-  position:relative;overflow:hidden;border-radius:var(--r);
-  min-height:300px;display:flex;align-items:flex-end;background:var(--paper-2);
-  box-shadow:0 0 0 1px var(--fio-forte);
+.preco{padding:clamp(66px,8vw,116px) 0}
+.preco .h2{max-width:18ch}
+.fatores{
+  display:grid;grid-template-columns:1fr 1fr;
+  margin-top:clamp(44px,5vw,62px);
+  border-top:1px solid var(--fio-forte);
 }
-.mat-w{grid-column:span 2}
-.mat-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
-.mat-card:hover img{transform:scale(1.045)}
-.mat-in{
-  position:relative;width:100%;padding:28px 24px 24px;
-  display:flex;flex-direction:column;gap:8px;color:#fff;
-  background:linear-gradient(180deg,rgba(18,19,22,0) 0%,rgba(18,19,22,.52) 40%,rgba(18,19,22,.9) 100%);
+.fatores li{padding:30px 40px 30px 0;border-bottom:1px solid var(--fio)}
+.fatores li:nth-child(2n){padding-left:40px;border-left:1px solid var(--fio)}
+.fatores li:nth-last-child(-n+2){border-bottom:0}
+.fatores h3{
+  font-family:var(--ff-body);
+  font-size:1.075rem;font-weight:600;line-height:1.35;letter-spacing:-.005em;margin-bottom:9px;
 }
-.mat-in strong{font-size:1.62rem;line-height:1.15;letter-spacing:-.012em}
-.mat-w .mat-in strong{font-size:1.92rem}
-.mat-in small{font-size:.88rem;line-height:1.55;color:rgba(255,255,255,.93);max-width:40ch}
-.mat-in em{
-  display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-style:normal;
-  font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;
+.fatores p{color:var(--txt-suave);font-size:.94rem;line-height:1.6;margin:0;max-width:44ch}
+
+.preco-fecho{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 30px;
+  margin-top:clamp(38px,4vw,52px);padding-top:clamp(30px,3vw,38px);
+  border-top:1px solid var(--fio-forte);
 }
-.mat-in em .ic{width:15px;height:15px;transition:transform .3s var(--ease)}
-.mat-card:hover .mat-in em .ic{transform:translateX(4px)}
+.preco-fecho p{margin:0;font-size:1.08rem;font-weight:600;max-width:48ch}
 
 /* --------------------------------------------------------------------------
    PROCESSO
@@ -679,7 +678,6 @@ body.travado{overflow:hidden}
   .pontos li{padding:24px 0}
   .pontos li + li{border-left:0;border-top:1px solid var(--fio-forte);padding-left:0}
   .rows{grid-template-columns:1fr}
-  .mat-grid{grid-template-columns:1fr 1fr}
   .passos{grid-template-columns:1fr 1fr}
   .passos li{padding:46px 24px 28px 0}
   .passos li + li{padding-left:24px}
@@ -726,10 +724,12 @@ body.travado{overflow:hidden}
   .row-ic{width:26px;height:26px}
   .row-go{font-size:0;gap:0}
   .row-go .ic{width:19px;height:19px}
-  .mat-grid{grid-template-columns:1fr}
-  .mat-w{grid-column:span 1}
-  .mat-card{min-height:250px}
-  .mat-in strong,.mat-w .mat-in strong{font-size:1.56rem}
+  .fatores{grid-template-columns:1fr}
+  .fatores li{padding:26px 0;border-bottom:1px solid var(--fio)}
+  .fatores li:nth-child(2n){padding-left:0;border-left:0}
+  .fatores li:last-child{border-bottom:0}
+  .preco-fecho{flex-direction:column;align-items:stretch;text-align:center}
+  .preco-fecho .btn{width:100%}
   .passos{grid-template-columns:1fr}
   .passos li,.passos li + li{padding:42px 0 26px;padding-left:0}
   .passos li + li::before{left:0}
