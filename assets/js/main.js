@@ -129,18 +129,24 @@
   var total = document.getElementById('pfTotal');
   if (total) { total.textContent = FOTOS.length; }
 
-  /* ---- 5.1 Esteira: duplica a trilha para o laço fechar sem emenda ---- */
-  var trilho = document.getElementById('esteiraTrilho');
-  if (trilho) {
-    var original = Array.prototype.slice.call(trilho.children);
-    original.forEach(function (li) {
+  /* ---- 5.1 Esteiras: duplica a trilha para o laço fechar sem emenda ----
+     Guarda os itens originais antes de clonar: o catálogo monta a grade
+     a partir deles, e sem essa cópia a grade sairia com tudo em dobro. */
+  var originais = {};
+
+  ['esteiraTrilho', 'catTrilho'].forEach(function (id) {
+    var trilho = document.getElementById(id);
+    if (!trilho) { return; }
+    originais[id] = Array.prototype.slice.call(trilho.children);
+    originais[id].forEach(function (li) {
       var copia = li.cloneNode(true);
       copia.setAttribute('aria-hidden', 'true');
-      var b = copia.querySelector('button');
-      if (b) { b.setAttribute('tabindex', '-1'); }
+      copia.querySelectorAll('a, button').forEach(function (el) {
+        el.setAttribute('tabindex', '-1');
+      });
       trilho.appendChild(copia);
     });
-  }
+  });
 
   /* ---- 5.2 Tela cheia ---- */
   var lupa = document.getElementById('lupa');
@@ -173,7 +179,8 @@
     /* removeAttribute em vez de src="" — src vazio faz o browser rebaixar
        a requisição para a própria página */
     lupaImg.removeAttribute('src');
-    if (galeria && galeria.hasAttribute('hidden')) { document.body.classList.remove('travado'); }
+    /* se a lupa foi aberta a partir de uma janela, o scroll continua travado */
+    if (!janelaAberta) { document.body.classList.remove('travado'); }
     if (voltarFoco && voltarFoco.focus) { voltarFoco.focus(); }
   }
 
@@ -207,23 +214,68 @@
   function abreGaleria() {
     if (!galeria) { return; }
     montaGrade();
-    voltarFoco = abrirGaleria;
-    galeria.removeAttribute('hidden');
+    abreJanela(galeria, 'fecharGaleria', abrirGaleria);
+  }
+
+  /* ---- 5.4 Catálogo completo · a grade sai da própria esteira ------------
+     Ler os itens originais evita repetir os 28 nomes e mensagens no JS:
+     o HTML continua sendo a única fonte, o que também é o que o Google lê. */
+  var catalogo = document.getElementById('catalogoTodo');
+  var catGrade = document.getElementById('catGrade');
+  var abrirCatalogo = document.getElementById('verCatalogo');
+  var catMontado = false;
+
+  var catTotal = document.getElementById('catTotal');
+  if (catTotal && originais.catTrilho) { catTotal.textContent = originais.catTrilho.length; }
+
+  function montaCatalogo() {
+    if (catMontado || !catGrade || !originais.catTrilho) { return; }
+    catGrade.innerHTML = originais.catTrilho.map(function (li) {
+      var a = li.querySelector('a');
+      var img = li.querySelector('img');
+      return '<li class="cat-item">'
+        + '<img src="' + img.getAttribute('src') + '" alt="' + img.getAttribute('alt') + '" loading="lazy" decoding="async">'
+        + '<div class="cat-item-in"><strong>' + img.getAttribute('alt') + '</strong>'
+        + '<a class="btn btn-red" href="' + a.getAttribute('href') + '" target="_blank" rel="noopener">'
+        + '<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg>Pedir orçamento</a>'
+        + '</div></li>';
+    }).join('');
+    catMontado = true;
+  }
+
+  function abreCatalogo() {
+    if (!catalogo) { return; }
+    montaCatalogo();
+    abreJanela(catalogo, 'fecharCatalogo', abrirCatalogo);
+  }
+
+  /* ---- 5.5 As duas janelas abrem e fecham do mesmo jeito ---- */
+  var janelaAberta = null;
+
+  function abreJanela(el, idFechar, origem) {
+    janelaAberta = { el: el, origem: origem };
+    voltarFoco = origem;
+    el.removeAttribute('hidden');
     document.body.classList.add('travado');
-    document.getElementById('fecharGaleria').focus();
+    document.getElementById(idFechar).focus();
   }
 
-  function fechaGaleria() {
-    if (!galeria || galeria.hasAttribute('hidden')) { return; }
-    galeria.setAttribute('hidden', '');
+  function fechaJanela() {
+    if (!janelaAberta) { return; }
+    janelaAberta.el.setAttribute('hidden', '');
     document.body.classList.remove('travado');
-    if (abrirGaleria) { abrirGaleria.focus(); }
+    if (janelaAberta.origem) { janelaAberta.origem.focus(); }
+    janelaAberta = null;
   }
 
-  if (abrirGaleria) { abrirGaleria.addEventListener('click', abreGaleria); }
-  if (galeria) { document.getElementById('fecharGaleria').addEventListener('click', fechaGaleria); }
+  if (abrirGaleria)  { abrirGaleria.addEventListener('click', abreGaleria); }
+  if (abrirCatalogo) { abrirCatalogo.addEventListener('click', abreCatalogo); }
+  ['fecharGaleria', 'fecharCatalogo'].forEach(function (id) {
+    var b = document.getElementById(id);
+    if (b) { b.addEventListener('click', fechaJanela); }
+  });
 
-  /* ---- 5.4 Um clique só serve esteira e grade ---- */
+  /* ---- 5.6 Um clique só serve esteira e grade ---- */
   document.addEventListener('click', function (e) {
     var alvo = e.target.closest('.pf-foto, .galeria-grade button');
     if (!alvo) { return; }
@@ -237,17 +289,17 @@
       if (e.key === 'ArrowRight') { mostra(atual + 1); }
       return;
     }
-    if (galeria && !galeria.hasAttribute('hidden') && e.key === 'Escape') { fechaGaleria(); }
+    if (janelaAberta && e.key === 'Escape') { fechaJanela(); }
   });
 
   /* ---- 6. Revelação ao rolar (progressivo: sem JS, tudo já aparece) ---- */
   var alvos = [];
   [
-    ['.hero-copy > *', 0],
-    ['.hero-slab', 0],
+    ['.hero-grid > *', 0],
+    ['.cat-topo > *', 0], ['.cat .pf-rodape > *', 1],
     ['.nunes .h2', 0], ['.fala', 1], ['.pontos li', 2],
     ['.sec-head > *', 0], ['.svc .tabs', 1],
-    ['.pf-topo > *', 0], ['.pf-rodape > *', 1],
+    ['.pf-topo > *', 0], ['.pf .pf-rodape > *', 1],
     ['.mat .h2', 0], ['.mat .sec-lead', 1], ['.mat-card', 2],
     ['.proc .h2', 0], ['.passos li', 2],
     ['.cta-copy > *', 0], ['.cta-side > *', 1],
@@ -273,7 +325,7 @@
   }
 
   /* ---- 6. Link do menu acompanha a seção ------------------------------ */
-  var secoes = ['servicos', 'trabalhos', 'materiais', 'processo', 'contato']
+  var secoes = ['catalogo', 'servicos', 'trabalhos', 'materiais', 'contato']
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
 

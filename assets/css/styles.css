@@ -3,16 +3,22 @@
 
    Direção: branco de mármore + vermelho da marca + grafite.
 
-   Tipografia — mesmo par da CLN Edificações (030), a pedido do Felipe:
+   Tipografia — mesmo par da CLN Edificações (030):
      · Playfair Display 700/800 só em tamanho de display, de 1.4rem para
-       cima. h1, h2, nome dos materiais, a fala da Val e a marca.
+       cima. h1, h2, nome das pedras, a fala da Val e a marca.
      · Archivo em tudo abaixo disso: títulos de card, listas, rótulos,
        botões e corpo de texto.
    O contraste vem da troca de família, não de meio ponto de tamanho.
-   O corpo segue o tratamento da CLN (17px, texto em cinza bem escuro) —
-   é o que impede o Archivo de parecer apagado.
+   O corpo segue o tratamento da CLN (17px, cinza bem escuro) — é o que
+   impede o Archivo de parecer apagado.
 
-   Seções alternam branco e vermelho. Tema travado em claro. Raio único 2px.
+   As seções alternam branco e vermelho. Como qualquer seção pode acabar
+   de um lado ou do outro, os componentes não usam cor fixa: leem as
+   variáveis de contexto (--acento, --fio, --txt-suave, --realce,
+   --fundo-secao), que `.sec-red` redefine. Assim trocar uma seção de cor
+   é só pôr ou tirar a classe.
+
+   Tema travado em claro. Raio único de 2px.
    ========================================================================== */
 
 :root{
@@ -21,18 +27,25 @@
   --paper-2:#EFEDE8;
   --vein:#E4E1DB;
   --vein-2:#D2CEC6;
-  --ash:#2E2C29;    /* corpo de texto, no tom da CLN (#2A2A2A) */
-  --ash-2:#5E5B56;  /* rótulos e legendas */
+  --ash:#2E2C29;
+  --ash-2:#5E5B56;
   --graphite:#16171A;
   --graphite-2:#24262A;
   --red:#B01522;
   --red-dark:#8E1019;
   --red-deep:#8C1019;
   --red-deep-2:#6E0C13;
-  --red-soft:rgba(176,21,34,.09);
 
-  --ff-disp:'Playfair Display', 'Didot', Georgia, serif;
-  --ff-body:'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  /* contexto da seção · o bloco .sec-red redefine tudo isto */
+  --fundo-secao:var(--slab);
+  --acento:var(--red);
+  --fio:var(--vein);
+  --fio-forte:var(--vein-2);
+  --txt-suave:var(--ash);
+  --realce:var(--paper);
+
+  --ff-disp:'Playfair Display', 'Times New Roman', Georgia, serif;
+  --ff-body:'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   --wrap:1220px;
   --r:2px;
@@ -59,8 +72,7 @@ a{color:inherit;text-decoration:none}
 ul,ol{margin:0;padding:0;list-style:none}
 p{margin:0 0 1em}
 h1,h2,h3{margin:0}
-button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
-button{cursor:pointer}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
 
 .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 24px}
 .ic{width:1.1em;height:1.1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
@@ -70,20 +82,19 @@ button{cursor:pointer}
 .skip-link:focus{left:0}
 
 a:focus-visible,button:focus-visible,summary:focus-visible{
-  outline:2px solid var(--red);outline-offset:3px;border-radius:var(--r);
+  outline:2px solid var(--acento);outline-offset:3px;border-radius:var(--r);
 }
 
 /* --------------------------------------------------------------------------
    ESCALA TIPOGRÁFICA
-   display (serifa)  ....  h1 / h2 / material / fala / marca
-   corpo (grotesca)  ....  h3 / linhas / rótulos / texto
    -------------------------------------------------------------------------- */
 .h2,
 .hero-h1,
 .mat-in strong,
 .fala p,
 .brand-txt strong,
-.foot-brand strong{
+.foot-brand strong,
+.galeria-barra h2{
   font-family:var(--ff-disp);
   font-weight:700;
   text-wrap:balance;
@@ -95,7 +106,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
   line-height:1.12;
   letter-spacing:-.012em;
 }
-/* palavra em destaque: itálico da mesma fonte, no vermelho da marca */
 .hero-h1 em{font-style:italic;font-weight:inherit;color:var(--red)}
 
 .h2{
@@ -105,14 +115,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
 }
 .h2-c{text-align:center}
 
-/* rótulo pequeno: grotesca, caixa alta, muito espaçado */
 .eyebrow{
   font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--red);margin:0 0 20px;display:flex;align-items:center;gap:14px;
+  color:var(--acento);margin:0 0 20px;display:flex;align-items:center;gap:14px;
 }
-.eyebrow::after{content:"";height:1px;flex:1;max-width:70px;background:var(--vein-2)}
+.eyebrow::after{content:"";height:1px;flex:1;max-width:70px;background:var(--fio-forte)}
 
-/* títulos de bloco: grotesca forte e pequena, bem abaixo do h2 */
 .pontos h3,
 .passos h3{
   font-family:var(--ff-body);
@@ -120,7 +128,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
   margin-bottom:9px;
 }
 
-.sec-lead{max-width:56ch;color:var(--ash);margin:22px 0 0;font-size:1.05rem;line-height:1.62}
+.sec-lead{max-width:56ch;color:var(--txt-suave);margin:22px 0 0;font-size:1.05rem;line-height:1.62}
 .sec-lead-c{margin-left:auto;margin-right:auto;text-align:center}
 .sec-head{margin-bottom:46px}
 .sec-head .h2{max-width:19ch}
@@ -153,7 +161,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
   -webkit-backdrop-filter:saturate(150%) blur(12px);
   border-bottom:1px solid var(--vein);
 }
-.head-in{height:100%;display:flex;align-items:center;gap:24px}
+.head-in{height:100%;display:flex;align-items:center;gap:22px}
 
 .brand{display:flex;align-items:center;gap:13px;margin-right:auto}
 .brand-mark{width:auto;height:40px}
@@ -161,7 +169,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
 .brand-txt strong{font-size:1.2rem;letter-spacing:.004em}
 .brand-txt small{font-size:.6rem;font-weight:600;letter-spacing:.19em;text-transform:uppercase;color:var(--ash-2);margin-top:5px}
 
-.nav{display:flex;align-items:center;gap:28px}
+.nav{display:flex;align-items:center;gap:24px}
 .nav-a{
   position:relative;font-size:.88rem;font-weight:500;color:var(--graphite);
   padding:6px 0;transition:color .2s var(--ease);
@@ -200,7 +208,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
 .hero-grid > .eyebrow{grid-area:olho}
 .hero-h1{grid-area:titulo;max-width:16ch}
 .hero-fig{grid-area:figura;align-self:center}
-.hero-sub{grid-area:sub;margin:26px 0 0;max-width:32rem;color:var(--ash);font-size:clamp(1.02rem,1.4vw,1.12rem);line-height:1.62}
+.hero-sub{grid-area:sub;margin:26px 0 0;max-width:32rem;color:var(--txt-suave);font-size:clamp(1.02rem,1.4vw,1.12rem);line-height:1.62}
 .hero-cta{grid-area:acoes;display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
 
 /* PNG sem fundo: nada de moldura, só a peça e um halo de luz atrás */
@@ -214,100 +222,19 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
 .hero-fig img{position:relative;width:100%;max-width:610px;filter:drop-shadow(0 28px 44px rgba(22,23,26,.2))}
 
 /* --------------------------------------------------------------------------
-   A NUNES
+   ESTEIRA CONTÍNUA · usada pelo catálogo e pelos trabalhos
+   A trilha é duplicada pelo JS e desliza -50%: quando a primeira metade
+   sai, a segunda já está exatamente no lugar dela, então o laço não tem
+   emenda.
    -------------------------------------------------------------------------- */
-.nunes{position:relative;padding:clamp(66px,8vw,116px) 0;background:var(--slab)}
-.nunes-in{position:relative}
-.nunes .h2{max-width:20ch}
-
-.fala{margin:32px 0 0;max-width:56ch;padding-left:28px;border-left:2px solid var(--red)}
-.fala p{
-  font-size:clamp(1.14rem,1.8vw,1.46rem);
-  font-weight:500;line-height:1.5;letter-spacing:-.004em;color:var(--graphite-2);margin:0;
-}
-.fala cite{
-  display:block;margin-top:20px;font-style:normal;font-family:var(--ff-body);
-  font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);
-}
-
-.pontos{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(48px,5vw,72px);border-top:1px solid var(--vein-2)}
-.pontos li{padding:30px 30px 4px 0}
-.pontos li + li{border-left:1px solid var(--vein-2);padding-left:30px}
-.pontos p{color:var(--ash);font-size:.94rem;line-height:1.6;margin:0}
-
-/* --------------------------------------------------------------------------
-   SERVIÇOS
-   -------------------------------------------------------------------------- */
-.svc{padding:clamp(66px,8vw,116px) 0;background:var(--slab)}
-
-.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--vein-2);margin-bottom:6px}
-.tab{
-  position:relative;background:none;border:0;padding:14px 18px;
-  font-size:.88rem;font-weight:600;letter-spacing:.004em;color:var(--ash);
-  transition:color .2s var(--ease);
-}
-.tab::after{
-  content:"";position:absolute;left:18px;right:18px;bottom:-1px;height:2px;
-  background:var(--red);transform:scaleX(0);transform-origin:left;
-  transition:transform .3s var(--ease);
-}
-.tab:hover{color:var(--graphite)}
-.tab.is-on{color:var(--graphite)}
-.tab.is-on::after{transform:scaleX(1)}
-
-.panel[hidden]{display:none}
-.panel.is-on .rows{animation:painel .4s var(--ease) both}
-@keyframes painel{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
-.rows{display:grid;grid-template-columns:repeat(2,1fr);column-gap:44px}
-.row{
-  position:relative;display:grid;grid-template-columns:auto 1fr auto;
-  align-items:center;gap:18px;
-  padding:24px 16px 24px 20px;border-bottom:1px solid var(--vein);
-  transition:background .25s var(--ease);
-}
-.row::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
-  background:var(--red);transform:scaleY(0);transform-origin:top;
-  transition:transform .3s var(--ease);
-}
-.row:hover{background:var(--paper)}
-.row:hover::before{transform:scaleY(1)}
-
-.row-ic{
-  width:30px;height:30px;flex:none;
-  fill:none;stroke:var(--red);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
-  transition:transform .3s var(--ease);
-}
-.row:hover .row-ic{transform:translateY(-2px)}
-
-.row-txt{display:flex;flex-direction:column;gap:4px;min-width:0}
-.row-txt strong{font-size:1.04rem;font-weight:600;line-height:1.35;letter-spacing:-.005em}
-.row-txt small{color:var(--ash);font-size:.875rem;line-height:1.55}
-.row-go{
-  display:inline-flex;align-items:center;gap:7px;flex:none;
-  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);
-}
-.row-go .ic{width:16px;height:16px;transition:transform .3s var(--ease)}
-.row:hover .row-go .ic{transform:translateX(4px)}
-
-/* --------------------------------------------------------------------------
-   TRABALHOS · esteira contínua
-   A trilha é duplicada pelo JS e desliza -50%: quando a primeira metade sai,
-   a segunda já está exatamente no lugar dela, então o laço não tem emenda.
-   -------------------------------------------------------------------------- */
-.pf{padding:clamp(66px,8vw,116px) 0 clamp(52px,6vw,80px);overflow:hidden}
-.pf-topo{margin-bottom:clamp(36px,4vw,52px)}
-.pf-topo .h2{max-width:22ch}
-
 .esteira{position:relative;width:100%}
-/* as pontas somem no vermelho em vez de cortar seco */
+/* as pontas somem no fundo da seção em vez de cortar seco */
 .esteira::before,
 .esteira::after{
-  content:"";position:absolute;top:0;bottom:0;width:clamp(40px,7vw,120px);z-index:2;pointer-events:none;
+  content:"";position:absolute;top:0;bottom:0;width:clamp(36px,7vw,120px);z-index:2;pointer-events:none;
 }
-.esteira::before{left:0;background:linear-gradient(90deg,var(--red-deep),rgba(140,16,25,0))}
-.esteira::after{right:0;background:linear-gradient(270deg,var(--red-deep),rgba(140,16,25,0))}
+.esteira::before{left:0;background:linear-gradient(90deg,var(--fundo-secao),transparent)}
+.esteira::after{right:0;background:linear-gradient(270deg,var(--fundo-secao),transparent)}
 
 .esteira-trilho{
   display:flex;align-items:stretch;gap:14px;width:max-content;
@@ -318,10 +245,131 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
 .esteira:hover .esteira-trilho,
 .esteira:focus-within .esteira-trilho{animation-play-state:paused}
 
+/* --------------------------------------------------------------------------
+   CATÁLOGO DE PEDRAS
+   -------------------------------------------------------------------------- */
+.cat{padding:clamp(60px,7vw,104px) 0 clamp(48px,6vw,76px);overflow:hidden}
+.cat-topo{margin-bottom:clamp(34px,4vw,48px)}
+.cat-topo .h2{max-width:20ch}
+
+.pedra{
+  position:relative;display:block;width:clamp(180px,20vw,230px);
+  border-radius:var(--r);overflow:hidden;
+  box-shadow:0 0 0 1px var(--fio-forte);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.pedra img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.pedra-nome{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 14px;background:var(--slab);color:var(--graphite);
+  font-size:.88rem;font-weight:600;line-height:1.3;letter-spacing:-.004em;
+}
+.pedra-nome .ic{width:16px;height:16px;color:var(--red);transition:transform .3s var(--ease)}
+.pedra:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--acento),0 16px 34px rgba(0,0,0,.24)}
+.pedra:hover .pedra-nome .ic{transform:translateX(3px)}
+
+/* grade do catálogo completo */
+.cat-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.cat-item{
+  border:1px solid var(--vein);border-radius:var(--r);overflow:hidden;background:var(--slab);
+  display:flex;flex-direction:column;
+  transition:box-shadow .3s var(--ease),transform .3s var(--ease);
+}
+.cat-item:hover{transform:translateY(-2px);box-shadow:var(--sh-sm)}
+.cat-item img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.cat-item-in{padding:14px 15px 16px;display:flex;flex-direction:column;gap:12px;flex:1}
+.cat-item-in strong{font-size:.98rem;font-weight:600;line-height:1.3;letter-spacing:-.005em}
+.cat-item-in .btn{margin-top:auto;padding:10px 14px;font-size:.82rem;width:100%}
+
+/* --------------------------------------------------------------------------
+   A NUNES
+   -------------------------------------------------------------------------- */
+.nunes{position:relative;padding:clamp(66px,8vw,116px) 0;background:var(--slab)}
+.nunes-in{position:relative}
+.nunes .h2{max-width:20ch}
+
+.fala{margin:32px 0 0;max-width:56ch;padding-left:28px;border-left:2px solid var(--acento)}
+.fala p{
+  font-size:clamp(1.14rem,1.8vw,1.46rem);
+  font-weight:500;line-height:1.5;letter-spacing:-.004em;color:var(--graphite-2);margin:0;
+}
+.fala cite{
+  display:block;margin-top:20px;font-style:normal;font-family:var(--ff-body);
+  font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--txt-suave);
+}
+
+.pontos{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(48px,5vw,72px);border-top:1px solid var(--fio-forte)}
+.pontos li{padding:30px 30px 4px 0}
+.pontos li + li{border-left:1px solid var(--fio-forte);padding-left:30px}
+.pontos p{color:var(--txt-suave);font-size:.94rem;line-height:1.6;margin:0}
+
+/* --------------------------------------------------------------------------
+   SERVIÇOS
+   -------------------------------------------------------------------------- */
+.svc{padding:clamp(66px,8vw,116px) 0;background:var(--slab)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--fio-forte);margin-bottom:6px}
+.tab{
+  position:relative;background:none;border:0;padding:14px 18px;
+  font-size:.88rem;font-weight:600;letter-spacing:.004em;color:var(--txt-suave);
+  opacity:.72;transition:opacity .2s var(--ease);
+}
+.tab::after{
+  content:"";position:absolute;left:18px;right:18px;bottom:-1px;height:2px;
+  background:var(--acento);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s var(--ease);
+}
+.tab:hover{opacity:1}
+.tab.is-on{opacity:1;color:inherit}
+.tab.is-on::after{transform:scaleX(1)}
+
+.panel[hidden]{display:none}
+.panel.is-on .rows{animation:painel .4s var(--ease) both}
+@keyframes painel{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.rows{display:grid;grid-template-columns:repeat(2,1fr);column-gap:44px}
+.row{
+  position:relative;display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:18px;
+  padding:24px 16px 24px 20px;border-bottom:1px solid var(--fio);
+  transition:background .25s var(--ease);
+}
+.row::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--acento);transform:scaleY(0);transform-origin:top;
+  transition:transform .3s var(--ease);
+}
+.row:hover{background:var(--realce)}
+.row:hover::before{transform:scaleY(1)}
+
+.row-ic{
+  width:30px;height:30px;flex:none;
+  fill:none;stroke:var(--acento);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .3s var(--ease);
+}
+.row:hover .row-ic{transform:translateY(-2px)}
+
+.row-txt{display:flex;flex-direction:column;gap:4px;min-width:0}
+.row-txt strong{font-size:1.04rem;font-weight:600;line-height:1.35;letter-spacing:-.005em}
+.row-txt small{color:var(--txt-suave);font-size:.875rem;line-height:1.55}
+.row-go{
+  display:inline-flex;align-items:center;gap:7px;flex:none;
+  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--acento);
+}
+.row-go .ic{width:16px;height:16px;transition:transform .3s var(--ease)}
+.row:hover .row-go .ic{transform:translateX(4px)}
+
+/* --------------------------------------------------------------------------
+   TRABALHOS
+   -------------------------------------------------------------------------- */
+.pf{padding:clamp(66px,8vw,116px) 0 clamp(52px,6vw,80px);overflow:hidden}
+.pf-topo{margin-bottom:clamp(36px,4vw,52px)}
+.pf-topo .h2{max-width:22ch}
+
 .pf-foto{
   display:block;padding:0;border:0;background:none;cursor:zoom-in;
   border-radius:var(--r);overflow:hidden;
-  box-shadow:0 0 0 1px rgba(255,255,255,.22);
+  box-shadow:0 0 0 1px var(--fio-forte);
   transition:transform .35s var(--ease),box-shadow .35s var(--ease);
 }
 .pf-foto img{
@@ -329,31 +377,32 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
   object-fit:cover;display:block;
   transition:filter .35s var(--ease);
 }
-.pf-foto:hover{transform:translateY(-3px);box-shadow:0 0 0 1px #fff,0 16px 34px rgba(0,0,0,.28)}
+.pf-foto:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--acento),0 16px 34px rgba(0,0,0,.24)}
 .pf-foto:hover img{filter:brightness(1.06)}
 
 .pf-rodape{
   display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px;
   margin-top:clamp(34px,4vw,48px);
 }
-.pf-conta{font-size:.9rem;color:rgba(255,255,255,.78)}
+.pf-conta{font-size:.9rem;color:var(--txt-suave)}
 
 /* --------------------------------------------------------------------------
-   GALERIA COMPLETA
+   JANELAS · galeria de fotos e catálogo completo
    -------------------------------------------------------------------------- */
-.galeria{
+.janela{
   position:fixed;inset:0;z-index:200;background:var(--paper);
   display:flex;flex-direction:column;
 }
-.galeria[hidden]{display:none}
-.galeria-barra{
+.janela[hidden]{display:none}
+.janela-barra{
   flex:none;background:var(--slab);border-bottom:1px solid var(--vein);
   box-shadow:0 2px 14px rgba(22,23,26,.06);
 }
-.galeria-barra-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:70px}
-.galeria-barra h2{font-family:var(--ff-disp);font-weight:700;font-size:1.5rem;letter-spacing:-.01em}
-.galeria-corpo{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:26px 0 44px}
-.galeria-dica{margin:0 0 22px;font-size:.9rem;color:var(--ash-2)}
+.janela-barra-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:70px}
+.janela-barra h2{font-family:var(--ff-disp);font-weight:700;font-size:1.5rem;letter-spacing:-.01em}
+.janela-corpo{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:26px 0 44px}
+.janela-dica{margin:0 0 22px;font-size:.9rem;color:var(--ash-2)}
+
 .galeria-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
 .galeria-grade button{
   display:block;width:100%;padding:0;border:0;background:var(--paper-2);cursor:zoom-in;
@@ -398,7 +447,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{
 .lupa-ant .ic{transform:rotate(90deg)}
 .lupa-prox .ic{transform:rotate(-90deg)}
 
-/* fundo sólido para não se confundir com o botão da galeria por baixo */
+/* fundo sólido para não se confundir com o botão da janela por baixo */
 .lupa-fechar{
   position:absolute;top:14px;right:14px;z-index:2;
   background:rgba(18,18,20,.9);border-color:rgba(255,255,255,.3);color:#fff;
@@ -421,6 +470,7 @@ body.travado{overflow:hidden}
 .mat-card{
   position:relative;overflow:hidden;border-radius:var(--r);
   min-height:300px;display:flex;align-items:flex-end;background:var(--paper-2);
+  box-shadow:0 0 0 1px var(--fio-forte);
 }
 .mat-w{grid-column:span 2}
 .mat-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
@@ -450,12 +500,12 @@ body.travado{overflow:hidden}
 .passos li::before{
   content:counter(p,decimal-leading-zero);
   position:absolute;top:0;left:0;
-  font-family:var(--ff-disp);font-weight:700;font-size:1rem;letter-spacing:.06em;color:var(--red);
+  font-family:var(--ff-disp);font-weight:700;font-size:1rem;letter-spacing:.06em;color:var(--acento);
 }
 .passos li + li::before{left:28px}
-.passos li::after{content:"";position:absolute;top:28px;left:0;right:0;height:1px;background:var(--vein-2)}
-.passos li:first-child::after{background:linear-gradient(90deg,var(--red) 0 30%,var(--vein-2) 30%)}
-.passos p{color:var(--ash);font-size:.94rem;line-height:1.6;margin:0}
+.passos li::after{content:"";position:absolute;top:28px;left:0;right:0;height:1px;background:var(--fio-forte)}
+.passos li:first-child::after{background:linear-gradient(90deg,var(--acento) 0 30%,var(--fio-forte) 30%)}
+.passos p{color:var(--txt-suave);font-size:.94rem;line-height:1.6;margin:0}
 
 /* --------------------------------------------------------------------------
    CONTATO
@@ -465,29 +515,29 @@ body.travado{overflow:hidden}
 .cta-copy .btn{margin-top:34px}
 .cta-ou{
   margin:38px 0 14px;font-size:.72rem;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.78);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--txt-suave);
 }
 .chips{display:flex;flex-wrap:wrap;gap:9px}
 .chips a{
   display:inline-block;padding:9px 16px;border-radius:var(--r);
-  border:1px solid rgba(255,255,255,.34);color:#fff;
+  border:1px solid var(--fio-forte);
   font-size:.85rem;font-weight:500;
   transition:background .22s var(--ease),border-color .22s var(--ease);
 }
-.chips a:hover{background:rgba(255,255,255,.14);border-color:#fff}
+.chips a:hover{background:var(--realce);border-color:var(--acento)}
 
 .cta-side{display:flex;flex-direction:column;gap:14px}
-.card-contato{background:var(--paper);border:1px solid var(--vein);border-radius:var(--r);padding:30px 28px}
+.card-contato{background:var(--realce);border:1px solid var(--fio-forte);border-radius:var(--r);padding:30px 28px}
 .card-contato h3{font-family:var(--ff-body);font-size:1.02rem;font-weight:700;letter-spacing:.004em;margin-bottom:22px}
-.contato-lista li{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(--vein)}
+.contato-lista li{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(--fio)}
 .contato-lista li:first-child{border-top:0;padding-top:0}
-.contato-lista .ic{width:19px;height:19px;color:var(--red);margin-top:5px}
+.contato-lista .ic{width:19px;height:19px;color:var(--acento);margin-top:5px}
 .contato-lista span{display:flex;flex-direction:column;gap:2px;min-width:0}
-.contato-lista small{font-size:.66rem;font-weight:700;letter-spacing:.19em;text-transform:uppercase;color:var(--ash)}
+.contato-lista small{font-size:.66rem;font-weight:700;letter-spacing:.19em;text-transform:uppercase;color:var(--txt-suave)}
 .contato-lista a,.contato-lista b{font-weight:600;font-size:1rem;word-break:break-word}
 .contato-lista a{transition:color .2s var(--ease)}
-.contato-lista a:hover{color:var(--red)}
-.card-logo{border:1px solid var(--vein);border-radius:var(--r);padding:26px;background:#fff}
+.contato-lista a:hover{color:var(--acento)}
+.card-logo{border:1px solid var(--fio-forte);border-radius:var(--r);padding:26px;background:#fff}
 .card-logo img{width:100%;max-width:280px;margin:0 auto}
 
 /* --------------------------------------------------------------------------
@@ -495,38 +545,49 @@ body.travado{overflow:hidden}
    -------------------------------------------------------------------------- */
 .faq{padding:clamp(66px,8vw,108px) 0;background:var(--slab)}
 .faq-in{max-width:830px}
-.acc{margin-top:clamp(34px,4vw,46px);border-top:1px solid var(--vein-2)}
-.acc details{border-bottom:1px solid var(--vein-2)}
+.acc{margin-top:clamp(34px,4vw,46px);border-top:1px solid var(--fio-forte)}
+.acc details{border-bottom:1px solid var(--fio-forte)}
 .acc summary{
   display:flex;align-items:center;justify-content:space-between;gap:18px;
   padding:21px 2px;cursor:pointer;list-style:none;
   font-size:1.02rem;font-weight:600;line-height:1.4;letter-spacing:-.004em;
-  transition:color .2s var(--ease);
+  transition:opacity .2s var(--ease);
 }
 .acc summary::-webkit-details-marker{display:none}
-.acc summary:hover{color:var(--red)}
-.acc summary .ic{width:19px;height:19px;color:var(--red);transition:transform .3s var(--ease)}
+.acc summary:hover{opacity:.72}
+.acc summary .ic{width:19px;height:19px;color:var(--acento);transition:transform .3s var(--ease)}
 .acc details[open] summary .ic{transform:rotate(180deg)}
 .acc-body{padding:0 2px 24px;max-width:66ch}
-.acc-body p{margin:0;color:var(--ash);font-size:.95rem;line-height:1.68}
+.acc-body p{margin:0;color:var(--txt-suave);font-size:.95rem;line-height:1.68}
 .acc details[open] .acc-body{animation:abre .35s var(--ease) both}
 @keyframes abre{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 
 .faq-cta{
   display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;
-  margin-top:44px;padding:26px 28px;background:var(--paper);border:1px solid var(--vein);border-radius:var(--r);
+  margin-top:44px;padding:26px 28px;background:var(--realce);border:1px solid var(--fio-forte);border-radius:var(--r);
 }
 .faq-cta p{margin:0;font-size:1.02rem;font-weight:600}
 
 /* --------------------------------------------------------------------------
    SEÇÕES VERMELHAS
-   A página alterna: hero branco · A Nunes vermelho · Serviços branco ·
-   Materiais vermelho · Processo branco · Contato vermelho · Dúvidas branco.
-   Este bloco vem depois das seções para sobrescrever os fundos claros.
+   A página alterna: hero branco · Catálogo vermelho · A Nunes branco ·
+   Serviços vermelho · Trabalhos branco · Materiais vermelho · Como
+   funciona branco · Dúvidas vermelho · Contato branco.
+   Aqui só se trocam as variáveis de contexto — os componentes acima já
+   leem delas, então nenhum precisa ser reescrito.
    -------------------------------------------------------------------------- */
 .sec-red{
-  position:relative;background:var(--red-deep);color:#fff;
+  position:relative;
+  background:var(--red-deep);
+  color:#fff;
   border-top:1px solid rgba(255,255,255,.14);
+
+  --fundo-secao:var(--red-deep);
+  --acento:#FFFFFF;
+  --fio:rgba(255,255,255,.2);
+  --fio-forte:rgba(255,255,255,.28);
+  --txt-suave:rgba(255,255,255,.92);
+  --realce:rgba(255,255,255,.09);
 }
 /* textura de pedra por cima do vermelho, quase imperceptível */
 .sec-red::before{
@@ -534,45 +595,23 @@ body.travado{overflow:hidden}
   background:url("../img/veio-faixa.jpg") center/cover no-repeat;
   opacity:.13;mix-blend-mode:overlay;pointer-events:none;
 }
-.sec-red > .wrap{position:relative}
+.sec-red > .wrap,
+.sec-red > .esteira{position:relative}
 
 .sec-red .h2,
 .sec-red h3{color:#fff}
-.sec-red .sec-lead{color:rgba(255,255,255,.92)}
-.sec-red .eyebrow{color:#fff}
-.sec-red .eyebrow::after{background:rgba(255,255,255,.38)}
-
-.sec-red a:focus-visible,
-.sec-red button:focus-visible{outline-color:#fff}
 
 /* botão principal se inverte: branco com texto vermelho */
 .sec-red .btn-red{background:#fff;color:var(--red-deep)}
 .sec-red .btn-red:hover{background:var(--paper);color:var(--red-deep)}
 
-/* A Nunes */
-.sec-red .fala{border-left-color:#fff}
+/* a fala da Val fica melhor com o fio vermelho da marca mesmo no branco */
 .sec-red .fala p{color:#fff}
-.sec-red .fala cite{color:rgba(255,255,255,.78)}
-.sec-red .pontos{border-top-color:rgba(255,255,255,.26)}
-.sec-red .pontos li + li{border-left-color:rgba(255,255,255,.26)}
-.sec-red .pontos p{color:rgba(255,255,255,.9)}
 
-/* Processo: a régua numerada vira branca sobre o vermelho */
-.sec-red .passos li::before{color:#fff}
-.sec-red .passos li::after{background:rgba(255,255,255,.26)}
-.sec-red .passos li:first-child::after{background:linear-gradient(90deg,#fff 0 30%,rgba(255,255,255,.26) 30%)}
-.sec-red .passos p{color:rgba(255,255,255,.9)}
-
-/* Contato: os cartões continuam claros para o telefone saltar */
-.sec-red .card-contato{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.26)}
-.sec-red .card-contato h3{color:#fff}
-.sec-red .contato-lista li{border-top-color:rgba(255,255,255,.2)}
-.sec-red .contato-lista .ic{color:#fff}
-.sec-red .contato-lista small{color:rgba(255,255,255,.8)}
-.sec-red .contato-lista a,
-.sec-red .contato-lista b{color:#fff}
-.sec-red .contato-lista a:hover{color:rgba(255,255,255,.74)}
-.sec-red .card-logo{border-color:rgba(255,255,255,.26)}
+/* o nome da pedra é uma etiqueta clara, então o texto dentro dela
+   continua escuro mesmo quando a seção é vermelha */
+.sec-red .pedra-nome{color:var(--graphite)}
+.sec-red .pedra-nome .ic{color:var(--red)}
 
 /* --------------------------------------------------------------------------
    RODAPÉ
@@ -620,8 +659,8 @@ body.travado{overflow:hidden}
    RESPONSIVO
    -------------------------------------------------------------------------- */
 @media (max-width:1080px){
-  .nav{gap:20px}
-  .nav-a{font-size:.84rem}
+  .nav{gap:18px}
+  .nav-a{font-size:.83rem}
   .brand-txt small{display:none}
   .rows{column-gap:32px}
 }
@@ -638,7 +677,7 @@ body.travado{overflow:hidden}
   .hero-cta{margin-top:28px}
   .pontos{grid-template-columns:1fr}
   .pontos li{padding:24px 0}
-  .pontos li + li{border-left:0;border-top:1px solid var(--vein-2);padding-left:0}
+  .pontos li + li{border-left:0;border-top:1px solid var(--fio-forte);padding-left:0}
   .rows{grid-template-columns:1fr}
   .mat-grid{grid-template-columns:1fr 1fr}
   .passos{grid-template-columns:1fr 1fr}
@@ -665,8 +704,8 @@ body.travado{overflow:hidden}
     background:var(--slab);border-bottom:1px solid var(--vein);box-shadow:var(--sh);
     max-height:0;overflow:hidden;transition:max-height .34s var(--ease);
   }
-  .nav.open{max-height:340px}
-  .nav-a{padding:15px 24px;border-top:1px solid var(--vein);font-size:1rem}
+  .nav.open{max-height:400px}
+  .nav-a{padding:15px 24px;border-top:1px solid var(--vein);font-size:1rem;color:var(--graphite)}
   .nav-a::after{display:none}
 }
 
@@ -696,12 +735,16 @@ body.travado{overflow:hidden}
   .passos li + li::before{left:0}
   .passos li:nth-child(3),.passos li:nth-child(4){padding-top:42px}
   .cta-copy .btn{width:100%}
+  .esteira-trilho{gap:10px}
+  .pedra{width:clamp(160px,52vw,200px)}
   .pf-rodape{flex-direction:column;align-items:stretch;text-align:center}
   .pf-rodape .btn{width:100%}
-  .esteira-trilho{gap:10px}
-  .galeria-barra-in{height:62px}
-  .galeria-barra h2{font-size:1.24rem}
+  .janela-barra-in{height:62px}
+  .janela-barra h2{font-size:1.24rem}
   .galeria-grade{grid-template-columns:repeat(2,1fr);gap:8px}
+  .cat-grade{grid-template-columns:repeat(2,1fr);gap:10px}
+  .cat-item-in{padding:12px 12px 14px;gap:10px}
+  .cat-item-in strong{font-size:.9rem}
   .lupa{
     grid-template-columns:1fr;grid-template-rows:1fr auto;
     padding:60px 12px 76px;justify-items:center;

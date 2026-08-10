@@ -115,10 +115,10 @@
     </a>
 
     <nav class="nav" id="menu" aria-label="Navegação principal">
+      <a href="#catalogo" class="nav-a">Catálogo</a>
       <a href="#servicos" class="nav-a">Serviços</a>
       <a href="#trabalhos" class="nav-a">Trabalhos</a>
       <a href="#materiais" class="nav-a">Materiais</a>
-      <a href="#processo" class="nav-a">Como funciona</a>
       <a href="#contato" class="nav-a">Contato</a>
     </nav>
 
@@ -163,8 +163,55 @@
   </div>
 </section>
 
+<!-- ===== CATÁLOGO DE PEDRAS ===== -->
+<section class="cat sec-red" id="catalogo">
+  <div class="wrap cat-topo">
+    <h2 class="h2">As pedras que a gente trabalha.</h2>
+    <p class="sec-lead">Granito, mármore, quartzito e sinterizado. Toque na pedra para pedir o orçamento dela direto no WhatsApp.</p>
+  </div>
+
+  <!-- esteira contínua · o JS duplica a trilha para o laço não ter emenda -->
+  <div class="esteira">
+    <ul class="esteira-trilho" id="catTrilho">
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Verde Ubatuba*."><img src="assets/img/catalogo/verde-ubatuba.jpg" alt="Verde Ubatuba" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Verde Ubatuba<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Branco Dallas*."><img src="assets/img/catalogo/branco-dallas.jpg" alt="Branco Dallas" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Branco Dallas<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Amarelo Ornamental*."><img src="assets/img/catalogo/amarelo-ornamental.jpg" alt="Amarelo Ornamental" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Amarelo Ornamental<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Bege Bahia*."><img src="assets/img/catalogo/bege-bahia.jpg" alt="Bege Bahia" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Bege Bahia<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Preto São Gabriel*."><img src="assets/img/catalogo/preto-sao-gabriel.jpg" alt="Preto São Gabriel" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Preto São Gabriel<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Preto São Gabriel Escovado*."><img src="assets/img/catalogo/preto-sao-gabriel-e.jpg" alt="Preto São Gabriel Escovado" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Preto São Gabriel Escovado<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Itaúnas*."><img src="assets/img/catalogo/itaunas.jpg" alt="Itaúnas" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Itaúnas<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Itaúnas Escovado*."><img src="assets/img/catalogo/itaunas-e.jpg" alt="Itaúnas Escovado" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Itaúnas Escovado<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Branco Siena*."><img src="assets/img/catalogo/branco-siena.jpg" alt="Branco Siena" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Branco Siena<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Branco Siena Escovado*."><img src="assets/img/catalogo/branco-siena-e.jpg" alt="Branco Siena Escovado" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Branco Siena Escovado<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Cinza Andorinha*."><img src="assets/img/catalogo/cinza-andorinha.jpg" alt="Cinza Andorinha" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Cinza Andorinha<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Cinza Ocre*."><img src="assets/img/catalogo/cinza-ocre.jpg" alt="Cinza Ocre" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Cinza Ocre<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Cinza Escovado*."><img src="assets/img/catalogo/cinza-escovado.jpg" alt="Cinza Escovado" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Cinza Escovado<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Exótico Gold*."><img src="assets/img/catalogo/exotico-gold.jpg" alt="Exótico Gold" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Exótico Gold<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Linha Estelar*."><img src="assets/img/catalogo/linha-estelar.jpg" alt="Linha Estelar" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Linha Estelar<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Super Branco*."><img src="assets/img/catalogo/super-branco.jpg" alt="Super Branco" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Super Branco<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Nano Glass*."><img src="assets/img/catalogo/nano-glass.jpg" alt="Nano Glass" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Nano Glass<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Branco Pitaya*."><img src="assets/img/catalogo/branco-pitaya.jpg" alt="Branco Pitaya" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Branco Pitaya<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Valentino*."><img src="assets/img/catalogo/valentino.jpg" alt="Valentino" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Valentino<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Calacata Silk*."><img src="assets/img/catalogo/calacata-silk.jpg" alt="Calacata Silk" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Calacata Silk<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Calacatita*."><img src="assets/img/catalogo/calacatita.jpg" alt="Calacatita" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Calacatita<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Taj Mahal Escovado*."><img src="assets/img/catalogo/taj-mahal-e.jpg" alt="Taj Mahal Escovado" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Taj Mahal Escovado<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Preto Via Láctea*."><img src="assets/img/catalogo/preto-via-lactea.jpg" alt="Preto Via Láctea" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Preto Via Láctea<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Mármore Branco*."><img src="assets/img/catalogo/marmore-branco.jpg" alt="Mármore Branco" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Mármore Branco<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Branco Paraná*."><img src="assets/img/catalogo/branco-parana.jpg" alt="Branco Paraná" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Branco Paraná<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Lâmina Sinterizada*."><img src="assets/img/catalogo/lamina-sinterizada.jpg" alt="Lâmina Sinterizada" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Lâmina Sinterizada<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Café Imperial*."><img src="assets/img/catalogo/cafe-imperial.jpg" alt="Café Imperial" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Café Imperial<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+      <li><a class="pedra" href="#" data-msg="Olá! Vim pelo site da Marmoraria Nunes e gostaria de um orçamento em *Cinza Absoluto Acetinado*."><img src="assets/img/catalogo/cinza-absoluto.jpg" alt="Cinza Absoluto Acetinado" width="640" height="480" loading="lazy" decoding="async"><span class="pedra-nome">Cinza Absoluto Acetinado<svg class="ic" aria-hidden="true"><use href="#i-wa"></use></svg></span></a></li>
+    </ul>
+  </div>
+
+  <div class="wrap pf-rodape">
+    <button type="button" class="btn btn-red btn-lg" id="verCatalogo">Ver todo o catálogo</button>
+    <span class="pf-conta"><span id="catTotal">28</span> pedras em estoque · amostras ilustrativas</span>
+  </div>
+</section>
+
 <!-- ===== A NUNES ===== -->
-<section class="nunes sec-red" id="nunes">
+<section class="nunes" id="nunes">
   <div class="wrap nunes-in">
     <h2 class="h2">Seis anos escolhendo pedra.</h2>
     <blockquote class="fala">
@@ -192,7 +239,7 @@
 </section>
 
 <!-- ===== SERVIÇOS ===== -->
-<section class="svc" id="servicos">
+<section class="svc sec-red" id="servicos">
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow">Serviços</p>
@@ -320,7 +367,7 @@
 </section>
 
 <!-- ===== TRABALHOS ===== -->
-<section class="pf sec-red" id="trabalhos">
+<section class="pf" id="trabalhos">
   <div class="wrap pf-topo">
     <h2 class="h2">Trabalhos que já saíram daqui.</h2>
     <p class="sec-lead">Bancadas, cubas, escadas e revestimentos instalados em Irecê e região.</p>
@@ -357,7 +404,7 @@
 </section>
 
 <!-- ===== MATERIAIS ===== -->
-<section class="mat" id="materiais">
+<section class="mat sec-red" id="materiais">
   <div class="wrap">
     <h2 class="h2 h2-c">Quatro caminhos de pedra.</h2>
     <p class="sec-lead sec-lead-c">Cada uma se comporta de um jeito no calor, na água e no risco. A gente indica a que combina com o seu ambiente.</p>
@@ -400,7 +447,7 @@
 </section>
 
 <!-- ===== PROCESSO ===== -->
-<section class="proc sec-red" id="processo">
+<section class="proc" id="processo">
   <div class="wrap">
     <h2 class="h2">Do primeiro contato<br>à peça instalada.</h2>
     <ol class="passos">
@@ -425,7 +472,7 @@
 </section>
 
 <!-- ===== DÚVIDAS ===== -->
-<section class="faq" id="faq">
+<section class="faq sec-red" id="faq">
   <div class="wrap"><div class="faq-in">
     <h2 class="h2">Perguntas que sempre chegam.</h2>
 
@@ -466,7 +513,7 @@
 </section>
 
 <!-- ===== CONTATO ===== -->
-<section class="cta sec-red" id="contato">
+<section class="cta" id="contato">
   <div class="wrap cta-grid">
 
     <div class="cta-copy">
@@ -545,6 +592,7 @@
     </div>
 
     <nav class="foot-nav" aria-label="Navegação do rodapé">
+      <a href="#catalogo">Catálogo</a>
       <a href="#servicos">Serviços</a>
       <a href="#trabalhos">Trabalhos</a>
       <a href="#materiais">Materiais</a>
@@ -571,19 +619,37 @@
 </a>
 
 <!-- ===== GALERIA COMPLETA (o JS preenche a grade na primeira abertura) ===== -->
-<div class="galeria" id="galeria" role="dialog" aria-modal="true" aria-labelledby="galeriaTitulo" hidden>
-  <div class="galeria-barra">
-    <div class="wrap galeria-barra-in">
+<div class="janela" id="galeria" role="dialog" aria-modal="true" aria-labelledby="galeriaTitulo" hidden>
+  <div class="janela-barra">
+    <div class="wrap janela-barra-in">
       <h2 id="galeriaTitulo">Todos os trabalhos</h2>
       <button type="button" class="fechar" id="fecharGaleria" aria-label="Fechar a galeria">
         <svg class="ic" aria-hidden="true"><use href="#i-x"></use></svg>
       </button>
     </div>
   </div>
-  <div class="galeria-corpo">
+  <div class="janela-corpo">
     <div class="wrap">
-      <p class="galeria-dica">Toque em uma foto para ver em tela cheia.</p>
+      <p class="janela-dica">Toque em uma foto para ver em tela cheia.</p>
       <ul class="galeria-grade" id="galeriaGrade"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CATÁLOGO COMPLETO (o JS monta a grade a partir da esteira) ===== -->
+<div class="janela" id="catalogoTodo" role="dialog" aria-modal="true" aria-labelledby="catalogoTitulo" hidden>
+  <div class="janela-barra">
+    <div class="wrap janela-barra-in">
+      <h2 id="catalogoTitulo">Catálogo de pedras</h2>
+      <button type="button" class="fechar" id="fecharCatalogo" aria-label="Fechar o catálogo">
+        <svg class="ic" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+  </div>
+  <div class="janela-corpo">
+    <div class="wrap">
+      <p class="janela-dica">As amostras são ilustrativas: cada chapa tem o veio e o tom dela. A pedra real você vê na loja ou pede foto no WhatsApp.</p>
+      <ul class="cat-grade" id="catGrade"></ul>
     </div>
   </div>
 </div>
